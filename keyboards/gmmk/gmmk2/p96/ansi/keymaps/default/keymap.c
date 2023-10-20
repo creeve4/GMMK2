@@ -25,10 +25,12 @@ enum custom_layers {
 
 
 
+
 // Custom Keycodes
 enum keycodes {
 	PASS = SAFE_RANGE,
 };
+
 
 
 
@@ -73,6 +75,7 @@ tap_dance_action_t tap_dance_actions[] = {
 
 
 
+
 // Combos
 const uint16_t PROGMEM volume[] = {KC_VOLD, KC_VOLU, COMBO_END};
 
@@ -80,50 +83,6 @@ combo_t key_combos[] = {
 	COMBO(volume, KC_F16),
 };
 
-
-
-// RGB Ilde Timeout
-static uint32_t key_timer; // timer to track the last keyboard activity
-static void refresh_rgb(void); // refreshes the activity timer and RGB, invoke whenever activity happens
-static void check_rgb_timeout(void); // checks if enough time has passed for RGB to timeout
-bool is_rgb_timeout = false; // store if RGB has timed out or not in a boolean
-
-void refresh_rgb() {
-  key_timer = timer_read32(); // store time of last refresh
-  if (is_rgb_timeout) { // only do something if rgb has timed out
-    is_rgb_timeout = false;
-    rgb_matrix_enable_noeeprom();
-  }
-}
-
-void check_rgb_timeout() {
-  if (!is_rgb_timeout && timer_elapsed32(key_timer) > RGBLIGHT_TIMEOUT) {
-    rgb_matrix_disable_noeeprom();
-    is_rgb_timeout = true;
-  }
-}
-
-// Then, call the above functions from QMK's built in post processing functions like so
-/* Runs at the end of each scan loop, check if RGB timeout has occured */
-void housekeeping_task_user(void) {
-  #ifdef RGBLIGHT_TIMEOUT
-  check_rgb_timeout();
-  #endif
-}
-
-/* Runs after each key press, check if activity occurred */
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-  #ifdef RGBLIGHT_TIMEOUT
-  if (record->event.pressed) refresh_rgb();
-  #endif
-}
-
-/* Runs after each encoder tick, check if activity occurred */
-void post_encoder_update_user(uint8_t index, bool clockwise) {
-  #ifdef RGBLIGHT_TIMEOUT
-  refresh_rgb();
-  #endif
-}
 
 
 
