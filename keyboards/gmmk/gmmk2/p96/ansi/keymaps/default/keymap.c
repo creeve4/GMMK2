@@ -26,6 +26,13 @@ enum custom_layers {
 
 
 
+void keyboard_post_init_user(void) {
+    rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine);
+}
+
+
+
+
 // Custom Keycodes
 enum keycodes {
 	PASS = SAFE_RANGE,
