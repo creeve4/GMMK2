@@ -37,19 +37,28 @@ enum keycodes {
 // Tap Dance
 enum tapdance_keycodes {
     LHT,
-	FN,
 	BRI,
+	FN,
+	WIN,
 };
 
 void lights (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
-        tap_code (KC_F13);
+        tap_code(KC_F13);
     } else if (state->count == 2) {
-        tap_code (KC_F14);
+        tap_code(KC_F14);
     } else if (state->count == 3) {
-        tap_code (KC_F15);
+        tap_code(KC_F15);
     } else {
-        reset_tap_dance (state);
+        reset_tap_dance(state);
+    }
+}
+
+void bri (tap_dance_state_t *state, void *user_data) {
+    if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine) {
+        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine_dim);
+    } else {
+        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine);
     }
 }
 
@@ -69,18 +78,27 @@ void td_fn_reset(tap_dance_state_t *state, void *user_data)
     }
 }
 
-void bri (tap_dance_state_t *state, void *user_data) {
-    if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine) {
-        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine_dim);
+void td_win_finished(tap_dance_state_t *state, void *user_data)
+{
+    if (state->count == 1) {
+		register_code(KC_RGUI);
     } else {
-        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine);
+        SEND_STRING("ChrisTina8232007"SS_TAP(X_ENT));
+    }
+}
+
+void td_win_reset(tap_dance_state_t *state, void *user_data)
+{
+    if (state->count == 1) {
+		unregister_code(KC_RGUI);        
     }
 }
 
 tap_dance_action_t tap_dance_actions[] = {
     [LHT] = ACTION_TAP_DANCE_FN(lights),
-	[FN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_fn_finished, td_fn_reset),
 	[BRI] = ACTION_TAP_DANCE_FN(bri),
+	[FN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_fn_finished, td_fn_reset),
+	[WIN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_win_finished, td_win_reset),
 };
 
 
@@ -105,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   KC_Q,     KC_W,     KC_E,     KC_R,     KC_T,     KC_Y,     KC_U,     KC_I,     KC_O,     KC_P,     KC_LBRC,  KC_RBRC,  KC_BSLS,  KC_P7,    KC_P8,    KC_P9,    KC_PPLS,
   KC_F17,   KC_A,     KC_S,     KC_D,     KC_F,     KC_G,     KC_H,     KC_J,     KC_K,     KC_L,     KC_SCLN,  KC_QUOT,  KC_ENT,   		  KC_P4,    KC_P5,    KC_P6,
   KC_LSFT,  KC_Z,     KC_X,     KC_C,     KC_V,     KC_B,     KC_N,     KC_M,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT,  			KC_UP,    KC_P1,    KC_P2,    KC_P3,    KC_PENT,
-  KC_LCTL,  KC_LGUI,  KC_LALT,                      KC_SPC,                                 KC_RALT,  KC_RGUI,  KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_P0,    KC_PDOT),
+  KC_LCTL,  KC_LGUI,  KC_LALT,                      KC_SPC,                                 KC_RALT,  TD(WIN),  KC_RCTL,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_P0,    KC_PDOT),
 
   /* Keymap _FL: Function Layer
    */
