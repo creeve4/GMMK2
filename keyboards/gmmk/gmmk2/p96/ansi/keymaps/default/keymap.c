@@ -38,6 +38,7 @@ enum keycodes {
 enum tapdance_keycodes {
     LHT,
 	FN,
+	BRI,
 };
 
 void lights (tap_dance_state_t *state, void *user_data) {
@@ -68,9 +69,18 @@ void td_fn_reset(tap_dance_state_t *state, void *user_data)
     }
 }
 
+void bri (tap_dance_state_t *state, void *user_data) {
+    if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine) {
+        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine_dim);
+    } else {
+        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine);
+    }
+}
+
 tap_dance_action_t tap_dance_actions[] = {
     [LHT] = ACTION_TAP_DANCE_FN(lights),
 	[FN] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_fn_finished, td_fn_reset),
+	[BRI] = ACTION_TAP_DANCE_FN(bri),
 };
 
 
@@ -100,11 +110,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _FL: Function Layer
    */
 [_FL] = LAYOUT(
-  QK_BOOT,  KC_MYCM,  KC_WHOM,  KC_CALC,  KC_MSEL,  KC_MPRV,  KC_MRWD,  KC_MPLY,  KC_MSTP,  _______,  _______,  _______,  _______,   _______,  RGB_MOD,  _______,  RGB_VAD,  RGB_VAI,
+  QK_BOOT,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  TD(BRI),  _______,  KC_MPRV,  KC_MNXT,
   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,
   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,
   KC_CAPS,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,             _______,  _______,  _______,
-  _______,  RGB_HUI,  RGB_HUD,  RGB_SPD,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  			 _______,  _______,  _______,  _______,  _______,
+  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  			 _______,  _______,  _______,  _______,  _______,
   _______,  _______,  _______,                      KC_MPLY,                                _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______)
 };
 
