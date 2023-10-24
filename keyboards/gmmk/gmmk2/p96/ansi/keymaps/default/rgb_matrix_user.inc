@@ -2,9 +2,9 @@ RGB_MATRIX_EFFECT(mine)
 RGB_MATRIX_EFFECT(mine_dim)
 
 //Standard colors
-#define BLUE		0, 100, 255
+#define BLUE		0, 82, 204
 #define VIOLET		140, 0, 255
-#define PINK		255, 0, 200
+#define PINK		230, 0, 180
 #define RED			255, 0, 0
 #define ESC			140, 0, 0
 #define ORANGE		255, 40, 0
@@ -15,9 +15,9 @@ RGB_MATRIX_EFFECT(mine_dim)
 #define OFF			0, 0, 0
 
 // Dim colors to 25%
-#define BLUE2		0, 22, 56
+#define BLUE2		0, 18, 46
 #define VIOLET2		35, 0, 64
-#define PINK2		64, 0, 50
+#define PINK2		56, 0, 44
 #define RED2		100, 0, 0
 #define ESC2		40, 0, 0
 #define ORANGE2		64, 10, 0
