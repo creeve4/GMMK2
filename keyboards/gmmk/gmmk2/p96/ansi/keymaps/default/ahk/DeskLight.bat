@@ -1,0 +1,2 @@
+@echo off
+curl.exe -X POST -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJiZjUzMWZhODJmZGQ0MDUxYmYwM2MwODE2Y2IyMjg3NSIsImlhdCI6MTY0NTI4MTA5MiwiZXhwIjoxOTYwNjQxMDkyfQ.gwOOE1_gYw8omJCeZs20xcGdZaDl66c2ZnGG9otnzqo" -H "Content-Type: application/json" http://homeassistant.local:8123/api/services/switch/toggle -d "{\"entity_id\":\"switch.desk_lights\"}"
