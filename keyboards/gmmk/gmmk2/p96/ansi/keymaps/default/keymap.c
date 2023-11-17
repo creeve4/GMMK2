@@ -49,6 +49,7 @@ enum tapdance_keycodes {
 	WIN,
 };
 
+// Lights
 void lights (tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         tap_code(KC_F13);
@@ -61,6 +62,7 @@ void lights (tap_dance_state_t *state, void *user_data) {
     }
 }
 
+// RGB Matris
 void bri (tap_dance_state_t *state, void *user_data) {
     if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine) {
         rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine_dim);
@@ -69,12 +71,13 @@ void bri (tap_dance_state_t *state, void *user_data) {
     }
 }
 
+// Function
 void td_fn_finished(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1) {
 		layer_on(_FL);
-    } else {
-        SEND_STRING("ChrisTina8232007"SS_TAP(X_ENT));
+    } else if (state->count == 2) {
+        tap_code(KC_MPLY);
     }
 }
 
@@ -85,6 +88,7 @@ void td_fn_reset(tap_dance_state_t *state, void *user_data)
     }
 }
 
+// WIN
 void td_win_finished(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1) {
@@ -100,6 +104,7 @@ void td_win_reset(tap_dance_state_t *state, void *user_data)
 		unregister_code(KC_RGUI);        
     }
 }
+
 
 tap_dance_action_t tap_dance_actions[] = {
     [LHT] = ACTION_TAP_DANCE_FN(lights),
@@ -135,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Keymap _FL: Function Layer
    */
 [_FL] = LAYOUT(
-  QK_BOOT,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  TD(BRI),  _______,  KC_MPLY,  KC_MNXT,
+  QK_BOOT,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  TD(BRI),  _______,  KC_MPRV,  KC_MNXT,
   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  KC_NUM,   _______,  _______,  _______,
   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,  _______,
   KC_CAPS,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,             _______,  _______,  _______,
