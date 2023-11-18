@@ -8,7 +8,7 @@ F15::Run C:\Users\creev\OfficeLightToggle
 
 F16::
 {
-	Send {Volume_Down}
+	Send {Volume_Up}
 	SoundSet 30
 }
 return
@@ -16,13 +16,13 @@ return
 $Volume_Up::
     SoundGet, volume 
     Send {Volume_Up}
-	Vol = % Round(volume + 5)
+	Vol = % volume + ( 5 - Mod(volume,5) )
     SoundSet, %Vol%
 Return
 
 $Volume_Down::
     SoundGet, volume 
     Send {Volume_Down}
-	Vol = % Round(volume + -5)
+	Vol = % volume - ( 5 - Mod(volume,5) )
     SoundSet, %Vol%
 Return
