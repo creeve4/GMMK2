@@ -3,17 +3,14 @@ SendMode Input
 SetWorkingDir %A_ScriptDir%
 
 Spotify := new Spotify_Basic()
-
-return ; End of auto-execute
+return
 
 F14::Spotify.TogglePlay()
 F15::Spotify.Next()
 F16::Spotify.Previous()
 
 class Spotify_Basic {
-
     _actions := {Next:11, Pause:47, Play:46, Previous:12, TogglePlay:14}
-
     __Call(Action) {
         if (!this._actions.HasKey(Action))
             throw Exception("Invalid action." Action, -1)
@@ -24,7 +21,6 @@ class Spotify_Basic {
         msg := this._actions[Action] << 16
         SendMessage 0x0319,, % msg,, % "ahk_id" hWnd
     }
-
 }
 Return
 
@@ -36,15 +32,17 @@ F13::
 Return
 
 $Volume_Up::
-    SoundGet, volume 
-    Send {Volume_Up}
-	Vol = % volume + ( 10 - Mod(volume,10) )
+    SoundGet, volume
+	VolU := (volume + 10)
+	Vol = % Round(VolU, -1)
+	Send {Volume_Up}
     SoundSet, %Vol%
 Return
 
 $Volume_Down::
-    SoundGet, volume 
-    Send {Volume_Down}
-	Vol = % volume - ( 10 - Mod(volume,10) )
+    SoundGet, volume
+	VolD := (volume - 10)
+	Vol = % Round(VolD, -1)
+	Send {Volume_Up}
     SoundSet, %Vol%
 Return
