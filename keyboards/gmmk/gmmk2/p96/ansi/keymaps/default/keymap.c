@@ -51,14 +51,16 @@ enum tapdance_keycodes {
 
 // Lights
 void lights (tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        tap_code(KC_F13);
-    } else if (state->count == 2) {
-        tap_code(KC_F14);
-    } else if (state->count == 3) {
-        tap_code(KC_F15);
-    } else {
-        reset_tap_dance(state);
+	switch (state->count) {
+		case 1:
+			tap_code(KC_F13);
+			break;
+		case 2:
+			tap_code(KC_F14);
+			break;
+        case 3:
+			tap_code(KC_F15);
+			break;
     }
 }
 
