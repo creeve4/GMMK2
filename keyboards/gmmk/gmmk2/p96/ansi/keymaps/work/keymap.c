@@ -27,7 +27,7 @@ enum custom_layers {
 
 
 void keyboard_post_init_user(void) {
-    rgb_matrix_mode(RGB_MATRIX_CUSTOM_off);
+    rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine);
 }
 
 
@@ -49,17 +49,19 @@ enum tapdance_keycodes {
 	WIN,
 };
 
+// Multi
 void multi (tap_dance_state_t *state, void *user_data) {
-    if (state->count == 1) {
-        tap_code(KC_F14);				// Play/Pause
-    } else if (state->count == 2) {
-        tap_code(KC_F15);				// Next Track
-    } else if (state->count == 3) {
-        tap_code(KC_F16);				// Previous Track
-        reset_tap_dance (state);
+	switch (state->count) {
+		case 1:
+			tap_code(KC_HOME);
+			break;
+		case 2:
+			tap_code16(LCTL(KC_HOME));
+			break;
     }
 }
 
+// RGB Matrix
 void bri (tap_dance_state_t *state, void *user_data) {
     if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine) {
         rgb_matrix_mode(RGB_MATRIX_CUSTOM_off);
@@ -68,12 +70,13 @@ void bri (tap_dance_state_t *state, void *user_data) {
     }
 }
 
+// Function
 void td_fn_finished(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1) {
 		layer_on(_FL);
-    } else {
-        register_code(KC_HOME);
+    } else if (state->count == 2) {
+        tap_code(KC_MPLY);
     }
 }
 
@@ -81,11 +84,10 @@ void td_fn_reset(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1) {
 		layer_off(_FL);        
-	} else {
-        unregister_code(KC_HOME);
     }
 }
 
+// WIN
 void td_win_finished(tap_dance_state_t *state, void *user_data)
 {
     if (state->count == 1) {
@@ -101,6 +103,7 @@ void td_win_reset(tap_dance_state_t *state, void *user_data)
 		unregister_code(KC_RGUI);        
     }
 }
+
 
 tap_dance_action_t tap_dance_actions[] = {
     [MLT] = ACTION_TAP_DANCE_FN(multi),
