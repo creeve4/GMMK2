@@ -64,10 +64,12 @@ void multi (tap_dance_state_t *state, void *user_data) {
 // RGB Matrix
 void bri (tap_dance_state_t *state, void *user_data) {
     if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine) {
+        rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine_dim);
+    } else if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_mine_dim) {
         rgb_matrix_mode(RGB_MATRIX_CUSTOM_off);
-    } else {
+    } else if (rgb_matrix_get_mode() == RGB_MATRIX_CUSTOM_off) {
         rgb_matrix_mode(RGB_MATRIX_CUSTOM_mine);
-    }
+	}
 }
 
 // Function
