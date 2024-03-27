@@ -7,13 +7,14 @@ RGB_MATRIX_EFFECT(off)
 #define VIOLET		140, 0, 255		// #8c00ff
 #define PINK		230, 0, 180		// #e600b4
 #define RED			255, 0, 0		// #ff0000
-#define ESC			140, 0, 0		// #8c0000
+#define ESC			150, 0, 0		// #8c0000
 #define ORANGE		255, 40, 0		// #ff2600
 #define YELLOW		200, 150, 0		// #c89600
 #define GREEN		0, 190, 20		// #00be14
 #define GREY		100, 100, 100	// #646464
 #define WHITE		220, 220, 220	// #dcdcdc
-#define OFF			0, 0, 0			// #000000
+#define TEAL		0, 179, 170		// #00ccc5
+#define OFF			0, 0, 0			// #00b3aa
 
 // Dim colors 50ish%
 #define BLUE2		0, 35, 87
@@ -26,6 +27,7 @@ RGB_MATRIX_EFFECT(off)
 #define GREEN2		0, 97, 10
 #define GREY2		60, 60, 60
 #define WHITE2		110, 110, 100
+#define TEAL2		0, 87, 82	
 
 
 // On
@@ -37,7 +39,7 @@ static bool mine(effect_params_t* params) {
   for (uint8_t i = 1; i < 13; i++) {
     rgb_matrix_set_color(i, ORANGE);		//Function #'s
   }
-  rgb_matrix_set_color(13, ORANGE);			//Prtsc
+  rgb_matrix_set_color(13, TEAL);			//Prtsc
   rgb_matrix_set_color(14, ORANGE);			//Home
   rgb_matrix_set_color(15, VIOLET);			//Function
   rgb_matrix_set_color(16, YELLOW);			//Vol +
@@ -116,7 +118,7 @@ static bool mine_dim(effect_params_t* params) {
   for (uint8_t i = 1; i < 13; i++) {
     rgb_matrix_set_color(i, ORANGE2);		//Function #'s
   }
-  rgb_matrix_set_color(13, ORANGE2);		//Prtsc
+  rgb_matrix_set_color(13, TEAL2);			//Prtsc
   rgb_matrix_set_color(14, ORANGE2);		//Home
   rgb_matrix_set_color(15, VIOLET2);		//Function
   rgb_matrix_set_color(16, YELLOW2);		//Vol +
