@@ -233,6 +233,10 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 		rgb_matrix_set_color(86, RGB_OFF);			//NumEnter
 		rgb_matrix_set_color(97, RGB_OFF);			//0
 		rgb_matrix_set_color(98, RGB_OFF);			//.
+		rgb_matrix_set_color(39, PINK);				//E
+		rgb_matrix_set_color(56, PINK);				//S
+		rgb_matrix_set_color(57, PINK);				//D
+		rgb_matrix_set_color(58, PINK);				//F
     }
     return false;
 }

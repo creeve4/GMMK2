@@ -54,7 +54,7 @@ static bool mine(effect_params_t* params) {
   
   rgb_matrix_set_color(36, GREEN);			//Tab
   for (uint8_t i = 37; i < 49; i++) {
-  rgb_matrix_set_color(i, BLUE);			//Q-]
+	rgb_matrix_set_color(i, BLUE);			//Q-]
   }
   rgb_matrix_set_color(49, GREEN);			//"\"
   rgb_matrix_set_color(50, BLUE);			//7
@@ -134,7 +134,7 @@ static bool mine_dim(effect_params_t* params) {
   
   rgb_matrix_set_color(36, GREEN2);			//Tab
   for (uint8_t i = 37; i < 49; i++) {
-  rgb_matrix_set_color(i, BLUE2);			//Q-]
+	rgb_matrix_set_color(i, BLUE2);			//Q-]
   }
   rgb_matrix_set_color(49, GREEN2);			//"\"
   rgb_matrix_set_color(50, BLUE2);			//7
