@@ -95,7 +95,7 @@ void td_win_finished(tap_dance_state_t *state, void *user_data)
     if (state->count == 1) {
 		register_code(KC_RGUI);
     } else {
-        SEND_STRING("Lovetina9"SS_TAP(X_ENT));
+        SEND_STRING("Love1tina"SS_TAP(X_ENT));
     }
 }
 
