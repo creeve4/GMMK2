@@ -1,0 +1,1 @@
+start "AHK" /D "C:\Users\creev\" /B "AHK_Combined"
