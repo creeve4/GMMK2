@@ -16,4 +16,4 @@
 
 #pragma once
 
-#define RGB_TIMEOUT 600000
+#define RGB_TIMEOUT 1200000
